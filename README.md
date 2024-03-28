@@ -12,7 +12,7 @@ This project implements a fault detection system for Heating, Ventilation, and A
 ## Usage
 1. Clone the repository to your local machine: 
     ```
-    git clone https: //github.com/hassan3014/Data-Driven-Fault-Detection-in-Air-Handling-Unit.git
+    //github.com/hassan3014/Data-Driven-Fault-Detection-in-Air-Handling-Unit.git
     ```
 
 2. Ensure you have the required Python libraries installed by running: 
