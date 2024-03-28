@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="/static/css/style.css">
+        
+        <link type="text/javascript" href="/static/js/charts/point.js">
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+
+        <title>AHU</title>
+        <style>
+        .mcsa2 {
+            text-decoration: none;
+            color: black;
+            cursor: pointer;
+            background-color: bg-primary bg-gradient;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="header">
+                <h2>AHU Monitoring and Analysis</h2>
+                <div>
+                    <a href="{% url 'dashboard' %}">Dashboard</a>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
+            <hr>
+            <br>
+
+            <!-- <div class="main-container">
+                <div class="text"><h2>Working</h2>
+                    <span>
+                        Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Odit amet quis quas animi rem saepe,
+                        qui
+                        mollitia perspiciatis explicabo suscipit id eaque?
+                        Dolorem
+                        fuga harum officia. Debitis, facilis quam quia,
+                        dignissimos
+                        expedita explicabo saepe illo iure ipsum delectus
+                        molestiae
+                        fugit fugiat vitae vero nemo officiis dolorem quos nobis
+                        veritatis? Ratione?
+                    </span>
+                </div>
+                <div class="image"><img src="/static/media/banner.jpg"></div>
+            </div>
+             -->
+
+            
+
+            <div class="linechart" style="margin: 0 auto;">
+                <div class="big-graph">
+                <canvas id="chart" height="400px" width="800px"></canvas>
+            </div>
+                <div class="scale">
+                    <ul>
+                        <li><a href="{% url 'dashboard' %}">Default</a></li>
+                        <li><a href="{% url 'dashboardt' sec=120 %}">2 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=240 %}">4 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=360 %}">6 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=480 %}">8 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=600 %}">10 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=720 %}">12 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=840 %}">14 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=960 %}">16 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=1080 %}">18 m</a></li>
+                        <li><a href="{% url 'dashboardt' sec=1200 %}">20 m</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="seperate-graphs">
+                <div class="results">
+                    <h1>Anomaly Detection </h1>
+                </div>
+<!--                <h3 align="center" >Fault Detection  SVM : {{data.result3}}</h3><br>-->
+                <h3 align="center">Fault Detection SVM: {% if data.svm_result == 'Not Detected' %} Not Detected {% else %} Detected {% endif %}</h3><br>
+
+<!--                <h3 align="center" >Fault Detection  Neural Network : {{data.result2}}</h3><br>-->
+                <h3 align="center">Fault Detection Neural Network: {% if data.nn_result == 'Not Detected' %} Not Detected {% else %} Detected {% endif %}</h3><br>
+<!--                <h3 align="center" >Fault Detection  KNN : {{data.result1}}</h3><br>-->
+                <h3 align="center">Fault Detection  KNN : {% if data.knn_result == 'Not Detected' %} Not Detected {% else %} Detected {% endif %}</h3>
+                <!-- {% if data.result == 1 %}
+                {% else %}
+                <h3 align="center" >Fault Detection : <span style="color: rgb(1, 170, 1);">Not Detected</span></h3>
+                {% endif %} -->
+                <hr>
+                <div class="graph">
+                    {% for d in data.idx %}
+                        <div class="small-charts t">
+                            <canvas id="{{ d }}" height="150px" width="300px"></canvas>
+                        </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+            <footer>
+                <h3>Faaiz Umar</h3>
+                <h3>Wasil Nadeem</h3>
+            </footer>
+        </div>
+
+        <script>
+
+            window.setTimeout(function () {
+                window.location.reload();
+            }, 5000);
+
+            for (let i = 1; i < 15; i++) {
+                const ctxm = document.getElementById('mychart'+i).getContext('2d');
+                const all = {{ data|safe }};
+
+
+                const myChartm = new Chart(ctxm, {
+                    type: 'bar',
+                    data: {
+                    // labels:,
+                    datasets: [{
+                        label: all.labels[i-1].split("AHU: ").pop(),
+                        data: all.values[i-1],
+                        backgroundColor: 'rgba(255, 162, 0, 0.5)',
+                        borderColor: 'rgba(75, 192, 200, 1)',
+                        borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                stepSize: 20,
+                            }
+                        }
+                    }
+                });
+            }
+
+
+            const labels = {{data.labels|safe}};
+            console.log(labels);
+            const data = {{data.values|safe}};
+
+
+            const ctx = document.getElementById('chart').getContext('2d');
+
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label:  'AHU Performace',
+                        data: data,
+                        backgroundColor: ['rgba(75, 192, 192, 0.5)', 'rgba(54, 162, 235, 0.5)', 'rgba(255, 99, 132, 0.5)'],
+                        borderColor: 'rgba(40, 200, 40, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    legend: {
+                        display: true,
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: false,
+                            stepSize: 20
+                        }
+                    }
+                }
+            });
+
+        </script>
+
+    </body>
+</html>

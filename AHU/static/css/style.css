@@ -1,0 +1,127 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    background-image: radial-gradient( circle farthest-corner at 22.4% 21.7%, rgb(6, 183, 218) 0%, rgba(2,83,185,1) 100.2% );
+    color:#fff !important ;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 15px 40px;
+
+}
+.header h2{
+    font-size: 32px;
+}
+.header div a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: .3s;
+    margin: 0 10px;
+}
+.header div a:hover{
+    border-bottom: 1px solid rgb(255, 162, 0);
+}
+
+.main-container{
+    height: calc(60vh - 50px);
+    padding: 0px;
+    /* width: 70%; */
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.text{
+    width: 500px;
+}
+.text h2{
+    font-size: 24px;
+    font-family: Arial;
+    margin-bottom: 10px;
+}
+.text span{
+    font-size: 16px;
+    font-family: Arial;
+    text-justify: auto;
+}
+.image{
+    width: 400px;
+}
+
+.t{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.seperate-graphs{
+    padding: 50px;
+    background: rgba(239, 239, 239, 0.789);
+}
+.seperate-graphs .results{
+    padding-bottom: 20px;
+    display: flex;
+    justify-content:center;
+}
+.seperate-graphs .graph{
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+.seperate-graphs .graph .small-charts{
+    width: 300px;
+    height:120px;
+    margin: 30px;
+    /* border: 2px solid red; */
+    padding: 40px 20px 10px 20px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #fff;
+}
+
+
+
+
+
+
+.linechart{
+    padding: 40px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.scale{
+    border-top: 1px solid rgb(185, 183, 183);
+    border-bottom: 1px solid rgb(185, 183, 183);
+    padding: 5px 0;
+    width: 90%;
+    margin: 0 auto;
+}
+.scale ul{
+    display: flex;
+    justify-content: space-evenly;
+}
+.scale ul li{
+    list-style-type: none;
+    margin: 0 10px;
+}
+.scale ul li a{
+    text-decoration: none;
+    color: black;
+}
+
+
+
+
+
+
+footer{
+    background-color: black;
+    padding: 20px ;
+    text-align: center;
+}
+footer h3{
+    color: white;
+
+}
