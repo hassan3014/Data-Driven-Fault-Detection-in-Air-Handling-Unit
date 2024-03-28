@@ -63,4 +63,4 @@ Models are evaluated using metrics such as accuracy and confusion matrix. The co
 The dataset used in this project was obtained from [Pacific Lab Northwest](insert_dataset_link).
 
 ## Contact
-For any inquiries or support, please contact [hassan.malikgmail.com].
+For any inquiries or support, please contact [hassan.malik1574@gmail.com].
